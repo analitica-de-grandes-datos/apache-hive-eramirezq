@@ -13,7 +13,7 @@ CREATE TABLE t0 (
 LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 
 
-CREATE TABLE docs AS SELECT letra, key, val FROM (SELECT letra, c3 FROM t0 LATERAL VIEW explode(c2) t0 AS letra ) dato 
+CREATE TABLE docs AS SELECT letra, key, value FROM (SELECT letra, c3 FROM t0 LATERAL VIEW explode(c2) t0 AS letra ) dato 
 LATERAL VIEW explode (c3) dato;
 INSERT OVERWRITE LOCAL DIRECTORY 'output' 
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
